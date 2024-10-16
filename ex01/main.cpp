@@ -3,7 +3,7 @@
 void clearScreen()
 {
 	// Efface l'écran et remet le curseur en haut à gauche
-	std::cout << "\033[2J\033[1;1H";
+	std::cout << "\033c";
 }
 
 void displayMenu()
@@ -18,10 +18,19 @@ void displayMenu()
 	std::cout << "Please choose an option (1-3): ";
 }
 
+//test main
+// int main()
+// {
+// 	Contact		contact;
+// 	contact.SetContactInfo();
+// 	contact.displaySearchIndex(0);
+// }
+
 int main()
 {
-	PhoneBook phoneBook;
-	std::string choice;
+	PhoneBook	phoneBook;
+	Contact		contact;
+	std::string	choice;
 	int			exit = 0;
 
 	while (true)
@@ -37,13 +46,18 @@ int main()
 			{
 				clearScreen();
 				std::cout << "You chose to ADD a contact.\n\n";
-				std::getline(std::cin, choice);
+				contact.SetContactInfo();
+				phoneBook.addContact(contact);
 				break;
 			}
 			else if (choice == "2" || choice == "SEARCH")
 			{
 				clearScreen();
 				std::cout << "You chose to SEARCH for a contact.\n\n";
+				phoneBook.displayPhoneBook();
+				
+				std::cout << "Choose an index for detail : ";
+				std::getline(std::cin, choice);
 				break;
 			}
 			else if (choice == "3" || choice == "EXIT")
